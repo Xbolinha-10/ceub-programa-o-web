@@ -2,4 +2,7 @@
 .titulos {
     color: blue;
     background-color: coral;
+    padding: 50px 40px 30px 20px;
+    border:solid black;
+    margin: 50px 40px 30px 20px;
 }
