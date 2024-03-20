@@ -1,6 +1,10 @@
-let texto1 = "Ola"
-let texto2 = "Mundo"
+let idade = 18;
+let nome = "João";
 
-let resultadoTexto = texto1 + "," + texto2 + "dsndsbjcnv" + 
-
-console.log(resultadoTexto);
+if (idade >= 18) {
+    if(nome === 'joao'){
+        
+        console.log("opa, pode entrar joão, você tem mais de 18 anos");
+    }
+    
+}
