@@ -1,8 +1,15 @@
+h1, h2, h3 {
+    color: yellow;
+}
 
+p {
+    color: green;
+    background-color: black;
+}
 .titulos {
     color: blue;
     background-color: coral;
     padding: 50px 40px 30px 20px;
-    border:solid black;
+    border:10px dotted black;
     margin: 50px 40px 30px 20px;
 }
