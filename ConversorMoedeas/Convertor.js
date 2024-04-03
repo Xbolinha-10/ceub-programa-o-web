@@ -1,15 +1,18 @@
 const valoresConversao = {
     real: {
         euro: 0.19,
-        dolar: 0.20
+        dolar: 0.20,
+        simbolo: "R$"
     },
     dolar: {
         real: 4.99,
-        euro: 0.92
+        euro: 0.92,
+        simbolo: "U$D"
     },
     euro: {
         real: 5.40,
-        dolar: 1.08
+        dolar: 1.08,
+        simbolo: "EU$"
     }
 }
 
@@ -26,9 +29,20 @@ function converter(){
         alert("As moedas são iguais!!")
         return; 
     }
+
+    if (valorUsuario <= 0 || valorUsuario == "") {
+        alert("Verificar valor!")
+        return;
+    }
+
+    
+
+    let simbolo = valoresConversao[moeda2]["simbolo"];
+    //console.log(simbolo);
+    
     let resultado = valorUsuario * valoresConversao [moeda1] [moeda2];
     let paragrafoResultado = document.getElementById("resultado");
-    paragrafoResultado.textContent = resultado;
+    paragrafoResultado.textContent = simbolo + " " + resultado.toFixed(2);
 
     //alert(resultado)
     //alert(valoresConversao[moeda1] [moeda2]);
