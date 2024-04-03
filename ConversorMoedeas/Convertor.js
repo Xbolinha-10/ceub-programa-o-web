@@ -16,6 +16,55 @@ const valoresConversao = {
     }
 }
 
+
+
+
+
+
+const botaoInverter = document.getElementById("botao-inverter");
+botaoInverter.addEventListener("click", inverter);
+
+
+const botaoConverter = document.getElementById("botao-converter");
+botaoConverter.addEventListener("click", converter);
+
+
+const botaoLimpar = document.getElementById("botao-limpar");
+botaoLimpar.addEventListener("click", limpar);
+
+
+document.addEventListener("keydown", function(event) {
+console.log(event);
+})
+
+let valorUsuario = document.getElementById("valorEntrada");
+valorUsuario.addEventListener("keypress", function(event){
+
+    event.preventDefault();
+    console.log(event);
+
+    if (event.ctrlKey == true && event.code == "KeyL") {
+        event.preventDefault();
+        limpar();
+    }
+
+    if (event.ctrlKey == true && event.code == "KeyI"){
+        event.preventDefault();
+        inverter();
+    }
+
+    if (event.key == "Enter"){
+        event.preventDefault();
+       converter(); 
+    }
+});
+
+
+
+
+
+
+
 //Console.log(valoresConversao)['Real'] ['euro']);
 
 function converter(){
@@ -52,6 +101,12 @@ function converter(){
     //alert (moeda2);
 }
 
+
+
+
+
+
+
 function limpar() {
     let paragrafoResultado = document.getElementById("resultado");
     paragrafoResultado.textContent = "";
@@ -59,8 +114,15 @@ function limpar() {
     let valorEntrada = document.getElementById("valorEntrada");
     valorEntrada.value = "";
 
-    alert("Você vai LIMPAR!");
+    //alert("Você vai LIMPAR!");
 }
+
+
+
+
+
+
+
 
 function inverter() {
     let valorMoeda1 = document.getElementById("moeda1").value;
