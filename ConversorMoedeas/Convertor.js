@@ -33,23 +33,21 @@ const botaoLimpar = document.getElementById("botao-limpar");
 botaoLimpar.addEventListener("click", limpar);
 
 
-document.addEventListener("keydown", function(event) {
+/*document.addEventListener("keydown", function(event) {
 console.log(event);
-})
+})*/
 
 let valorUsuario = document.getElementById("valorEntrada");
 valorUsuario.addEventListener("keypress", function(event){
 
-    event.preventDefault();
     console.log(event);
 
-    if (event.ctrlKey == true && event.code == "KeyL") {
+    if (event.ctrlKey == true && event.key == "L") {
         event.preventDefault();
         limpar();
     }
 
     if (event.ctrlKey == true && event.code == "KeyI"){
-        event.preventDefault();
         inverter();
     }
 
