@@ -33,6 +33,27 @@ const botaoLimpar = document.getElementById("botao-limpar");
 botaoLimpar.addEventListener("click", limpar);
 
 
+const botaoAceitarMensagem = document.getElementById("botao-aceitar-mensagem")
+botaoAceitarMensagem.addEventListener("click", aceitarMensagem);
+
+console.log(localStorage.getItem("aceitouCookie"));
+
+if(localStorage.getItem("aceitouCookie") == "1"){
+    console.log("usuario ja aceitou os termos, não vou mais mostrar.")
+    const divMensagemUsuario = document.getElementById("mensagem-usuario");
+    divMensagemUsuario.classList.add("oculto");
+}
+
+function aceitarMensagem(){
+    alert("usuario aceitou os termos! ");
+    const divMensagemUsuario = document.getElementById("mensagem-usuario");
+    divMensagemUsuario.classList.add("oculto");
+}
+
+localStorage.setItem("aceitouCookie", "1");
+
+
+
 /*document.addEventListener("keydown", function(event) {
 console.log(event);
 })*/
@@ -59,12 +80,6 @@ valorUsuario.addEventListener("keypress", function(event){
 
 
 
-
-
-
-
-//Console.log(valoresConversao)['Real'] ['euro']);
-
 function converter(){
 
     let valorUsuario = document.getElementById("valorEntrada").value;
@@ -85,18 +100,30 @@ function converter(){
     
 
     let simbolo = valoresConversao[moeda2]["simbolo"];
-    //console.log(simbolo);
-    
+//console.log(simbolo);
+
+
     let resultado = valorUsuario * valoresConversao [moeda1] [moeda2];
+
     let paragrafoResultado = document.getElementById("resultado");
     paragrafoResultado.textContent = simbolo + " " + resultado.toFixed(2);
 
-    //alert(resultado)
-    //alert(valoresConversao[moeda1] [moeda2]);
 
-    //alert(valorUsuario);
-    //alert (moeda1);
-    //alert (moeda2);
+}
+
+let objetoResultado = {
+    valorDoUsuario: valorUsuario,
+    valorMoeda1: moeda1,
+    valorMoeda2: moeda2,
+    valorResultado: resultado
+}
+
+console.log(objetoResultado);
+localStorage.setItem("historico", objetoResultado);
+
+
+function salvarResultadoNoLocalStorage(resultado){
+
 }
 
 
