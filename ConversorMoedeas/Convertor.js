@@ -34,15 +34,15 @@ botaoAceitaMensagem.addEventListener("click", aceitarMensagem);
 console.log(localStorage.getItem("aceitouCookie"));
 
 
-if(localStorage.getItem("aceitouCookie") == "1"){
+if (localStorage.getItem("aceitouCookie") == "1") {
     console.log("usuario ja aceitou os termos, não vou mais mostrar.")
     const divMensagemUsuario = document.getElementById("mensagem-usuario");
     divMensagemUsuario.classList.add("oculto");
 }
 
-function aceitarMensagem(){
+function aceitarMensagem() {
     alert("Usuário aceitou os termos! ");
-    const divMensagemUsuario = document.getElementById ("mensagem-usuario")
+    const divMensagemUsuario = document.getElementById("mensagem-usuario")
     divMensagemUsuario.classList.add("oculto");
 }
 
@@ -50,30 +50,30 @@ function aceitarMensagem(){
 localStorage.setItem("aceitouCookie", "1");
 
 let valorUsuario = document.getElementById("valorEntrada");
-valorUsuario.addEventListener("keypress", function(event){
+valorUsuario.addEventListener("keypress", function (event) {
 
-console.log(event);
+    console.log(event);
 
-if(event.ctrlKey == true && event.key == "L"){
-    event.preventDefault();
-    limpar();
-}
+    if (event.ctrlKey == true && event.key == "L") {
+        event.preventDefault();
+        limpar();
+    }
 
-if(event.ctrlKey == true && event.code == "KeyI"){
-    inverter();
+    if (event.ctrlKey == true && event.code == "KeyI") {
+        inverter();
 
-}
+    }
 
-if(event.ctrlKey == true && event.code == "KeyL"){
+    if (event.ctrlKey == true && event.code == "KeyL") {
 
-    event.preventDefault();
-    limpar();
-}
+        event.preventDefault();
+        limpar();
+    }
 
-if(event.key == "Enter"){
-    event.preventDefault();
-    converter();
-}
+    if (event.key == "Enter") {
+        event.preventDefault();
+        converter();
+    }
 });
 
 
@@ -83,14 +83,25 @@ if(event.key == "Enter"){
 
 
 
-function converter(){
+
+
+
+
+
+
+
+
+function converter() {
+
+    let historicoRecuperado = recuperaHistorico();
+
 
     let valorUsuario = document.getElementById("valorEntrada").value;
 
 
 
 
-    if (valorUsuario <= 0 || valorUsuario == "")   {
+    if (valorUsuario <= 0 || valorUsuario == "") {
         alert("Verificar valor! ");
         return;
     }
@@ -105,46 +116,80 @@ function converter(){
     let moeda2 = document.getElementById("moeda2").value;
 
     if (moeda1 == moeda2) {
-        alert ("As moedas são iguais!!")
+        alert("As moedas são iguais!!")
         return;
     }
-    
+
 
 
 
     let simbolo = valoresConversao[moeda2]["simbolo"];
     //console.log(simbolo)
-    
+
 
     let resultado = valorUsuario * valoresConversao[moeda1][moeda2];
 
     let paragrafoResultado = document.getElementById("resultado");
     paragrafoResultado.textContent = simbolo + "  " + resultado.toFixed(2);
 
+    let objetoResultado = {
+        valorDoUsuario: valorUsuario,
+        valorMoeda1: moeda1,
+        valorMoeda2: moeda2,
+        valorResultado: resultado.toFixed(2)
+    }
 
+    //console.log (objetoResultado);
+
+
+    salvarHistorico(objetoResultado);
+
+    //let objetoResultadoJSON = JSON.stringify(objetoResultado);
+
+    //localStorage.setItem("historico", objetoResultadoJSON);
+
+    // Converter objeto javascript para texto (json) antes de salvar no localstorage 
+    // localstorage.setItem ("historico", objetoResultado);
 }
 
 
-let objetoResultado = {
-    valorDoUsuario: valorUsuario,
-    valorMoeda1: moeda1,
-    valorMoeda2: moeda2,
-    valorResultado: resultado
+function recuperaHistorico() {
+    let historico = localStorage.getItem("historico");
+        if(!historico) {
+        return[];
+        }
+    let historicoObjeto = JSON.parse(historico);
+        return historicoObjeto;
+
 }
 
-console.log (objetoResultado);
-localStorage.setItem("historico", objetoResultado);
-
-
-
-function salvarResultadoNoLocalStorage(resultado){
-    
+function salvarHistorico(conversao) {
+    let historico = recuperaHistorico(); 
+        historico.push(conversao);
+        historico = JSON.stringify(historico);
+        localStorage.setItem("historico", historico);
 }
 
 
 
 
-function limpar(){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function limpar() {
 
     let paragrafoResultado = document.getElementById("resultado");
     paragrafoResultado.textContent = " ";
@@ -158,7 +203,17 @@ function limpar(){
 
 
 
-function inverter(){
+
+
+
+
+
+
+
+
+
+
+function inverter() {
     let valorMoeda1 = document.getElementById("moeda1").value;
     let valorMoeda2 = document.getElementById("moeda2").value;
 
